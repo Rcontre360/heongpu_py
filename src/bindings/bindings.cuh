@@ -12,4 +12,5 @@
 #include "./encryptor.cuh"
 #include "./decryptor.cuh"
 #include "./operator.cuh"
+#include "./ciphertext.cuh"
 
