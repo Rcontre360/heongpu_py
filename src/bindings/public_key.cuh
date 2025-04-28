@@ -52,7 +52,7 @@ void bind_public_key(py::module_& m)
         .def("coeff_modulus_count", &Publickey::coeff_modulus_count);
 
     py::class_<MultipartyPublickey, Publickey>(m, "MultipartyPublickey")
-        .def(py::init<Parameters&, RNGSeed>())
+        .def(py::init<Parameters&, int>())
         .def("seed", &MultipartyPublickey::seed);
 }
 

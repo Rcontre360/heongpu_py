@@ -21,12 +21,13 @@ void bind_plaintext(py::module_& m) {
             self.store_in_host(reinterpret_cast<cudaStream_t>(stream_ptr));
         }, py::arg("stream_ptr") = 0)
         .def("is_on_device", &Plaintext::is_on_device)
-        .def("get_data_vector", [](Plaintext& self, uintptr_t stream_ptr) {
+        .def("data", &Plaintext::data)
+        .def("get_data", [](Plaintext& self, uintptr_t stream_ptr) {
             std::vector<Data64> data;
             self.get_data(data, reinterpret_cast<cudaStream_t>(stream_ptr));
             return data;
         }, py::arg("stream_ptr") = 0)
-        .def("set_data_vector", [](Plaintext& self, const std::vector<Data64>& data) {
+        .def("set_data", [](Plaintext& self, const std::vector<Data64>& data) {
             self.set_data(data);
         }, py::arg("data"))
         .def("get_data_host_vector", [](Plaintext& self, uintptr_t stream_ptr) {

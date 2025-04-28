@@ -27,9 +27,9 @@ void bind_hekey_generator(py::module_& m) {
             //self.generate_multi_party_public_key(all_pk, pk, reinterpret_cast<cudaStream_t>(stream_ptr));
         //}, py::arg("all_pk"), py::arg("pk"), py::arg("stream_ptr") = 0)
 
-        //.def("generate_relin_key", [](HEKeyGenerator& self, Relinkey& rk, Secretkey& sk, uintptr_t stream_ptr) {
-            //self.generate_relin_key(rk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
-        //}, py::arg("rk"), py::arg("sk"), py::arg("stream_ptr") = 0)
+        .def("generate_relin_key", [](HEKeyGenerator& self, Relinkey& rk, Secretkey& sk, uintptr_t stream_ptr) {
+            self.generate_relin_key(rk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
+        }, py::arg("rk"), py::arg("sk"), py::arg("stream_ptr") = 0)
 
         //.def("generate_multi_party_relin_key_piece", [](HEKeyGenerator& self, MultipartyRelinkey& rk, Secretkey& sk, uintptr_t stream_ptr) {
             //self.generate_multi_party_relin_key_piece(rk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
@@ -39,9 +39,9 @@ void bind_hekey_generator(py::module_& m) {
             //self.generate_multi_party_relin_key_piece(rk_s1_common, rk_new, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
         //}, py::arg("rk_s1_common"), py::arg("rk_new"), py::arg("sk"), py::arg("stream_ptr") = 0)
 
-        //.def("generate_galois_key", [](HEKeyGenerator& self, Galoiskey& gk, Secretkey& sk, uintptr_t stream_ptr) {
-            //self.generate_galois_key(gk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
-        //}, py::arg("gk"), py::arg("sk"), py::arg("stream_ptr") = 0)
+        .def("generate_galois_key", [](HEKeyGenerator& self, Galoiskey& gk, Secretkey& sk, uintptr_t stream_ptr) {
+            self.generate_galois_key(gk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));
+        }, py::arg("gk"), py::arg("sk"), py::arg("stream_ptr") = 0)
 
         //.def("generate_multi_party_galios_key_piece", [](HEKeyGenerator& self, Galoiskey& gk, Secretkey& sk, uintptr_t stream_ptr) {
             //self.generate_multi_party_galios_key_piece(gk, sk, reinterpret_cast<cudaStream_t>(stream_ptr));

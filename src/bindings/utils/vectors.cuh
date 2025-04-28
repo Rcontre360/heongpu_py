@@ -60,8 +60,10 @@ void bind_vectors(py::module_& m) {
         .def("resize", [](HostVector<Data64>& vec, size_t new_size) {
             vec.resize(new_size);
         })
-        .def("data", [](HostVector<Data64>& vec) {
-            return reinterpret_cast<uintptr_t>(vec.data());
-        });
+        .def("get", [](const HostVector<Data64>& vec, size_t i) {
+            if (i >= vec.size()) throw py::index_error();
+            return vec[i];
+        }, py::arg("index"));
+
 }
 

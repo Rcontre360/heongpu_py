@@ -7,6 +7,7 @@ namespace py = pybind11;
 
 void bind_operator(py::module_ &m) {
     py::class_<HEOperator, std::shared_ptr<HEOperator>>(m, "HEOperator")
+        .def(py::init<Parameters&>(), py::arg("context"))
         .def("add", &HEOperator::add)
         .def("add_inplace", &HEOperator::add_inplace)
 

@@ -24,7 +24,6 @@ inline void bind_parameters(py::module_& m) {
         // Setters
         .def("set_poly_modulus_degree", &Parameters::set_poly_modulus_degree)
         .def("set_coeff_modulus", &Parameters::set_coeff_modulus)
-        .def("set_custom_coeff_modulus", &Parameters::set_custom_coeff_modulus)
         .def("set_default_coeff_modulus", &Parameters::set_default_coeff_modulus)
         .def("set_plain_modulus", &Parameters::set_plain_modulus)
         

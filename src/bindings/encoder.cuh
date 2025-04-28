@@ -26,12 +26,12 @@ void bind_encoder(py::module_& m) {
         .def("encode", py::overload_cast<
             Plaintext&, const HostVector<double>&, double, const ExecutionOptions&>(&HEEncoder::encode),
             py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
-        .def("encode", py::overload_cast<
-            Plaintext&, const std::vector<Complex64>&, double, const ExecutionOptions&>(&HEEncoder::encode),
-            py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
-        .def("encode", py::overload_cast<
-            Plaintext&, const HostVector<Complex64>&, double, const ExecutionOptions&>(&HEEncoder::encode),
-            py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
+        //.def("encode", py::overload_cast<
+            //Plaintext&, const std::vector<Complex64>&, double, const ExecutionOptions&>(&HEEncoder::encode),
+            //py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
+        //.def("encode", py::overload_cast<
+            //Plaintext&, const HostVector<Complex64>&, double, const ExecutionOptions&>(&HEEncoder::encode),
+            //py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
         .def("encode", py::overload_cast<
             Plaintext&, const double&, double, const ExecutionOptions&>(&HEEncoder::encode),
             py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
@@ -39,30 +39,29 @@ void bind_encoder(py::module_& m) {
             Plaintext&, const std::int64_t&, double, const ExecutionOptions&>(&HEEncoder::encode),
             py::arg("plain"), py::arg("message"), py::arg("scale"), py::arg("options") = ExecutionOptions())
 
-        .def("decode", py::overload_cast<
-            std::vector<uint64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+        .def("decode", py::overload_cast<std::vector<uint64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            std::vector<int64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+
+        .def("decode", py::overload_cast<std::vector<int64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            HostVector<uint64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+
+        .def("decode", py::overload_cast<HostVector<uint64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            HostVector<int64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+
+        .def("decode", py::overload_cast<HostVector<int64_t>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            std::vector<double>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+
+        .def("decode", py::overload_cast<std::vector<double>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            HostVector<double>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+
+        .def("decode", py::overload_cast<HostVector<double>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
             py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            std::vector<Complex64>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
-            py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
-        .def("decode", py::overload_cast<
-            HostVector<Complex64>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
-            py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
+        //.def("decode", py::overload_cast<
+            //std::vector<Complex64>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+            //py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
+        //.def("decode", py::overload_cast<
+            //HostVector<Complex64>&, Plaintext&, const ExecutionOptions&>(&HEEncoder::decode),
+            //py::arg("message"), py::arg("plain"), py::arg("options") = ExecutionOptions())
 
         .def("slot_count", &HEEncoder::slot_count);
 }

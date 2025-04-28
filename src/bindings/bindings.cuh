@@ -3,6 +3,7 @@
 #include "./utils/vectors.cuh"
 #include "./utils/storagemanager.cuh"
 #include "./public_key.cuh"
+#include "./keyswitch.cuh"
 #include "./secret_key.cuh"
 #include "./plaintext.cuh"
 #include "./parameters.cuh"
