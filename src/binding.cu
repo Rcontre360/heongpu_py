@@ -15,7 +15,7 @@ int get_device_count() {
     return count;
 }
 
-PYBIND11_MODULE(heongpu_py, m) {
+PYBIND11_MODULE(heongpu, m) {
     m.def("set_device", &set_cuda_device, "Set the active CUDA device");
     m.def("get_device_count", &get_device_count, "Get CUDA device count");
 

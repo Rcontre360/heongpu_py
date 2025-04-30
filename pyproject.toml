@@ -3,10 +3,7 @@ requires = ["scikit-build-core", "pybind11"]
 build-backend = "scikit_build_core.build"
 
 [project]
-name = "heongpu_py"
+name = "heongpu"
 version = "0.1.0"
 
-#[tool.scikit-build]
-#wheel.packages = ["src/heongpu_py"]
-#cmake.targets = ["heongpu_py"]  # Your actual CMake target name
 
