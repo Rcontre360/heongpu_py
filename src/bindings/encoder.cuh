@@ -1,11 +1,20 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <pybind11/stl_bind.h>
 #include "heongpu.cuh"
 
 namespace py = pybind11;
 using namespace heongpu;
 
+PYBIND11_MAKE_OPAQUE(std::vector<uint64_t>);
+PYBIND11_MAKE_OPAQUE(std::vector<int64_t>);
+PYBIND11_MAKE_OPAQUE(std::vector<double>);
+
 void bind_encoder(py::module_& m) {
+    py::bind_vector<std::vector<uint64_t> >(m, "VecUint");
+    py::bind_vector<std::vector<int64_t> >(m, "VecInt");
+    py::bind_vector<std::vector<double> >(m, "VecDouble");
+
     py::class_<HEEncoder>(m, "HEEncoder")
         .def(py::init<Parameters&>(), py::arg("context"))
         .def("encode", py::overload_cast<
