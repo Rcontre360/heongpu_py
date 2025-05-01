@@ -52,10 +52,8 @@ void bind_ciphertext(py::module_& m) {
     .def("in_ntt_domain", &Ciphertext::in_ntt_domain)
     .def("scale", &Ciphertext::scale)
     .def("rescale_required", &Ciphertext::rescale_required)
-    .def("relinearization_required", &Ciphertext::relinearization_required);
-
-    //.def(py::init<const Ciphertext&>())  // copy constructor
-    //.def(py::init<Ciphertext&&>())       // move constructor
+    .def("relinearization_required", &Ciphertext::relinearization_required)
+    .def(py::init<const Ciphertext&>());  // copy constructor
     //.def("copy_assign", [](Ciphertext& self, const Ciphertext& other) {
         //self = other;
         //return self;

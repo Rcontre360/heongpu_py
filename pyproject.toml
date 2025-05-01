@@ -6,4 +6,9 @@ build-backend = "scikit_build_core.build"
 name = "heongpu"
 version = "1.0.0"
 
+[tool.scikit-build]
+ninja.make-fallback = true
 
+[tool.scikit-build.cmake.define]
+CMAKE_CXX_COMPILER_LAUNCHER = "ccache"
+CMAKE_CUDA_COMPILER_LAUNCHER = "ccache"

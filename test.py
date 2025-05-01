@@ -1,24 +1,24 @@
 from heongpu import  HEKeyGenerator, set_device, Publickey, SecretKey, Parameters, SCHEMES, KEY_SWITCHING_TYPES, SECURITY_LEVELS
 from heongpu import _heongpu_api
 from ckks import CKKSContext, CKKSTensor
+import copy
 
 poly_modulus_degree = 32768
-coeff_mod_bit_sizes = [60, 40, 40, 60]
-scale = 2**40
-vec_size = 4096
-repetitions = 100
+coeff_mod_bit_sizes = [60, 60, 60, 60]
+scale = 2**50
+vec_size = 100
 
 context = CKKSContext(poly_modulus_degree, scale, coeff_mod_bit_sizes)
 context.generate_keys()
 context.print_ckks_params()
 
-message = [i for i in range(100)]
+message = [i+1 for i in range(vec_size)] # [1, 2]
 t1 = CKKSTensor(context, message)
 
-message2 = [i for i in range(100)]
-t2 = CKKSTensor(context, message2)
+message2 = [float(i+1) for i in range(vec_size)] # [1,2]
+print(message,message2)
 
-t2 -= t1
+t3 = t1.dot(message2)
 
-print(t2.decrypt()[0:10])
+print("B: ",t3.decrypt()[0])
 
