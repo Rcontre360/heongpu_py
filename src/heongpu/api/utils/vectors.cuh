@@ -1,23 +1,29 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <pybind11/stl_bind.h>
 #include "heongpu.cuh"
 
 namespace py = pybind11;
 using namespace heongpu;
 
+PYBIND11_MAKE_OPAQUE(std::vector<uint64_t>);
+PYBIND11_MAKE_OPAQUE(std::vector<int64_t>);
+PYBIND11_MAKE_OPAQUE(std::vector<double>);
+
 void bind_vectors(py::module_& m) {
+    py::bind_vector<std::vector<uint64_t> >(m, "VecUint");
+    py::bind_vector<std::vector<int64_t> >(m, "VecInt");
+    py::bind_vector<std::vector<double> >(m, "VecDouble");
 
     py::class_<DeviceVector<Data64>>(m, "DeviceVector")
         .def(py::init<>())
         .def(py::init([](size_t size, uintptr_t stream_ptr) {
             cudaStream_t stream = reinterpret_cast<cudaStream_t>(stream_ptr);
             return std::make_unique<DeviceVector<Data64>>(size, stream, MemoryPool::instance().get_device_resource());
-            //return DeviceVector<Data64>(size, stream, MemoryPool::instance().get_device_resource());
         }), py::arg("size"), py::arg("stream_ptr") = 0)
         .def(py::init([](const std::vector<Data64>& v, uintptr_t stream_ptr) {
             cudaStream_t stream = reinterpret_cast<cudaStream_t>(stream_ptr);
             return std::make_unique<DeviceVector<Data64>>(v, stream, MemoryPool::instance().get_device_resource());
-            //return DeviceVector<Data64>(v, stream, MemoryPool::instance().get_device_resource());
         }), py::arg("vector"), py::arg("stream_ptr") = 0)
         .def("__len__", [](const DeviceVector<Data64>& vec) {
             return vec.size();

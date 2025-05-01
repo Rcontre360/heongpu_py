@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/functional.h>
 #include <pybind11/stl.h>
-#include "./bindings/bindings.cuh"
+#include "./heongpu/api/bindings.cuh"
 
 namespace py = pybind11;
 
@@ -15,7 +15,7 @@ int get_device_count() {
     return count;
 }
 
-PYBIND11_MODULE(heongpu, m) {
+PYBIND11_MODULE(_heongpu_api, m) {
     m.def("set_device", &set_cuda_device, "Set the active CUDA device");
     m.def("get_device_count", &get_device_count, "Get CUDA device count");
 
