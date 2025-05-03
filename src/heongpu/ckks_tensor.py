@@ -127,6 +127,39 @@ class CKKSTensor:
     def __str__(self):
         return "<CKKSTensor (encrypted)>"
 
+    def __matmul__(self, matrix: list[list[float]]) -> 'CKKSTensor':
+        def decompose_matrix(matrix: list[list[float]]) -> list[list[float]]:
+            n = len(matrix)
+            res = [[] for _ in range(n)]
+
+            for i in range(1,n):
+                cur_i = 0
+                cur_j = i
+                for plus in range(n-i):
+                    res[i].append(matrix[cur_i + plus][cur_j + plus])
+
+            for i in range(n):
+                cur_i = i
+                cur_j = 0
+                for plus in range(n - cur_i):
+                    res[(n-i)%n].append(matrix[cur_i + plus][cur_j + plus])
+
+            return res
+
+        ctxt = _heongpu_api.Ciphertext(self.ctxt)
+        t1 = CKKSTensor.from_ciphertext(self.context,ctxt)
+        [a,b,c,d] = decompose_matrix(matrix)
+
+        a = t1 * a
+        t1.rotate_inplace()
+        b = t1 * b
+        t1.rotate_inplace()
+        c = t1 * c
+        t1.rotate_inplace()
+        d = t1 * d
+
+        return a + b + c + d
+
     def dot(self, coef: list[float]) -> 'CKKSTensor':
         multiplied = self * coef
 
@@ -172,5 +205,4 @@ class CKKSTensor:
         obj.plain = None  # will be set on decryption
 
         return obj
-
 
